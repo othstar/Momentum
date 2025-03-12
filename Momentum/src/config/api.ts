@@ -1,14 +1,14 @@
 import axios from "axios";
 
-const baseUrl = "https://momentum.redberryinternship.ge/api";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
-const getData = axios.create({
+const axiosClient = axios.create({
   baseURL: baseUrl,
   timeout: 10 * 1000,
   timeoutErrorMessage: "request timed out",
 });
 
-getData.interceptors.request.use((req) => {
+axiosClient.interceptors.request.use((req) => {
   req.headers["Content-Type"] = "application/json";
   req.headers["Accept"] = "application/json";
 
@@ -20,4 +20,4 @@ getData.interceptors.request.use((req) => {
   return req;
 });
 
-export default getData;
+export default axiosClient;

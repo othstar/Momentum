@@ -1,0 +1,48 @@
+header {
+  width: 100%;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  font-family: "FiraGO";
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+.header-left span {
+  color: #8338ec;
+  font-size: 31px;
+  font-weight: 400;
+  line-height: 100%;
+  font-family: "Fredoka One";
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.register-user {
+  border-color: #8338ec;
+  padding: 0.4rem 1rem;
+  border: 1px solid #8338ec;
+  border-radius: 0.5rem;
+}
+
+.header-right span {
+  color: black;
+}
+
+.new-task {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid #8338ec;
+  border-radius: 0.5rem;
+}
