@@ -10,7 +10,7 @@ const Statuses = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error instanceof Error) return <div>Error: {error.message}</div>;
   return (
-    <div className="status-bar container">
+    <div className="status-bar">
       {data?.map((status: { id: number; name: string; icon: string }) => (
         <div
           className={`status ${

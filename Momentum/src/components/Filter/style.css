@@ -1,0 +1,25 @@
+.filter-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.dropdown-button {
+  background-color: transparent;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: none;
+}
+
+.dropdown-button:focus {
+  outline: none;
+}
+
+.dropdown-button:hover span {
+  color: #8338ec;
+  transition: color 0.5s;
+}
+
+.dropdown-button span {
+  color: black;
+}

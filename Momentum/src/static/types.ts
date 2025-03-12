@@ -1,5 +1,8 @@
-export type Data = {
-  id: number;
+export type TaskFormData = {
   name: string;
-  icon: string;
+  description: string;
+  priority: "low" | "medium" | "high";
+  dueDate: string;
+  department: string;
+  employeeImage: File | null;
 };

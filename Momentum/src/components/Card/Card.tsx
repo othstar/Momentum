@@ -2,7 +2,7 @@ import "./style.css";
 
 const Card = () => {
   return (
-    <div className="card-container container">
+    <div className="card-container">
       <div className="card">
         <div className="upper-card">
           <div className="upper-left-card"></div>
