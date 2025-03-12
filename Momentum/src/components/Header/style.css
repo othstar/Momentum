@@ -30,19 +30,25 @@ header {
 }
 .register-user {
   border-color: #8338ec;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 1.3rem;
   border: 1px solid #8338ec;
   border-radius: 0.5rem;
 }
 
 .header-right span {
   color: black;
+  font-weight: 400;
+  line-height: 100%;
 }
 
 .new-task {
   display: flex;
   gap: 0.5rem;
-  padding: 0.4rem 1rem;
+  padding: 0.7rem 1.3rem;
   border: 1px solid #8338ec;
   border-radius: 0.5rem;
+  background-color: #8338ec;
+}
+.new-task span {
+  color: white;
 }

@@ -1,22 +1,27 @@
 import "./style.css";
 import Logo from "../../assets/Images/Hourglass.png";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
     <header>
       <div className="header-container container">
-        <div className="header-left">
-          <span>Momentum</span>
-          <img src={Logo} alt="Momentum-Logo" />
-        </div>
+        <NavLink to={"/"}>
+          <div className="header-left">
+            <span>Momentum</span>
+            <img src={Logo} alt="Momentum-Logo" />
+          </div>
+        </NavLink>
         <div className="header-right">
           <div className="register-user">
             <span>თანამშრომლის შექმნა</span>
           </div>
-          <div className="new-task">
-            <span>+</span>
-            <span>შექმენი ახალი დავალება</span>
-          </div>
+          <NavLink to="/addtask">
+            <div className="new-task">
+              <span>+</span>
+              <span>შექმენი ახალი დავალება</span>
+            </div>
+          </NavLink>
         </div>
       </div>
     </header>
