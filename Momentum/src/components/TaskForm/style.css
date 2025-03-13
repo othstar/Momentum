@@ -1,0 +1,90 @@
+.task-container h2 {
+  color: black;
+  font-family: "FiraGO";
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 100%;
+}
+
+.form-fill {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-fill label {
+  color: black;
+  font-family: "FiraGO";
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 5px;
+}
+
+.form-fill input,
+.form-fill textarea,
+.form-fill select {
+  width: 550px;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  color: black;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: border 0.3s ease;
+  display: block;
+}
+
+.form-fill input:focus,
+.form-fill textarea:focus,
+.form-fill select:focus {
+  outline: none;
+  border-color: #6c757d;
+}
+
+.input-field.error {
+  border-color: red;
+}
+
+.input-field.valid {
+  border-color: green;
+}
+
+.priority-status {
+  display: flex;
+  justify-content: space-between;
+}
+
+.priority-status select {
+  width: 259px;
+}
+
+.validation-container {
+  margin-top: 5px;
+}
+
+.validation-container span {
+  display: block;
+  font-size: 10px;
+  font-family: "FiraGO";
+  font-weight: 350;
+  line-height: 100%;
+  transition: color 0.3s ease;
+}
+
+.error-text {
+  color: red;
+}
+
+.valid-text {
+  color: green;
+}
+
+.default-text {
+  color: #6c757d;
+}
