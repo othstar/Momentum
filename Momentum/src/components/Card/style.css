@@ -1,0 +1,113 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  border: 1px solid red;
+  border-radius: 20px;
+  font-family: "FiraGO";
+  padding: 1rem;
+}
+
+.card h3 {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 100%;
+  color: #212529;
+}
+
+.upper-card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upper-left-card {
+  display: flex;
+  gap: 1rem;
+}
+
+.priority-status {
+  display: flex;
+  gap: 0.5rem;
+  border-radius: 10px;
+  padding: 5px 20px;
+}
+
+.card-low {
+  border: 1px solid #08a508;
+}
+
+.card-high {
+  border: 1px solid #fa4d4d;
+}
+
+.card-high img {
+  rotate: 180deg;
+}
+
+.card-medium {
+  border: 1px solid #ffbe0b;
+}
+
+.card-low span {
+  color: #08a508 !important;
+}
+
+.upper-left-card span {
+  color: #212529;
+}
+
+.departments {
+  color: white !important;
+  margin: auto;
+}
+
+.human-res {
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 2px 20px;
+  background-color: green;
+}
+
+.IT {
+  border: 1px solid transparent;
+  background-color: #ff006e'
+}
+
+.priority {
+  margin: auto;
+  height: 10px;
+}
+
+.high {
+  rotate: 180deg;
+}
+
+.upper-right-card {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.upper-right-card span {
+  color: #212529;
+}
+
+.card-description {
+  margin: 2rem 0;
+}
+
+.card-description p {
+  color: #343a40;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,13 +1,14 @@
 .status-bar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
 .status {
   color: white;
   border: 1px solid transparent;
   border-radius: 10px;
-  width: 381px;
+  width: 398px;
   text-align: center;
   padding: 0.5rem 0;
   font-family: "FiraGO";

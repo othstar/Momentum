@@ -79,7 +79,7 @@ const TaskForm = () => {
 
           {/* Description */}
           <div className="input-container">
-            <label>აღწერა*</label>
+            <label>აღწერა</label>
             <textarea
               {...register("description")}
               className={`input-field ${
@@ -140,14 +140,15 @@ const TaskForm = () => {
               <label>სტატუსი*</label>
               <select
                 {...register("status")}
+                defaultValue={"დასაწყები"}
                 className={`input-field ${
                   errors.status ? "error" : touchedFields.status ? "valid" : ""
                 }`}
               >
-                <option value="">აირჩიე</option>
-                <option value="pending">Pending</option>
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Completed</option>
+                <option>დასაწყები</option>
+                <option>პროგრესში</option>
+                <option>მზად ტესტირებისთვის</option>
+                <option>დასრულებული</option>
               </select>
             </div>
           </div>
@@ -157,9 +158,9 @@ const TaskForm = () => {
           {/* Department */}
           <div className="input-container">
             <label>დეპარტამენტი*</label>
-            <input
-              type="text"
+            <select
               {...register("department")}
+              defaultValue="დიზაინის დეპარტამენტი"
               className={`input-field ${
                 errors.department
                   ? "error"
@@ -167,12 +168,18 @@ const TaskForm = () => {
                   ? "valid"
                   : ""
               }`}
-            />
+            >
+              <option>მარკეტინგის დეპარტამენტი</option>
+              <option>დიზაინის დეპარტამენტი</option>
+              <option>ლოჯისტიკის დეპარტამენტი</option>
+              <option>IT დეპარტამენტი</option>
+              <option>გაყიდვების დეპარტამენტი</option>
+            </select>
           </div>
 
           {/* Responsible Person */}
           <div className="input-container">
-            <label>პასუხისმგებელი თანამშრომელი*</label>
+            <label className="collegue">პასუხისმგებელი თანამშრომელი</label>
             <select
               {...register("person")}
               className={`input-field ${
@@ -188,7 +195,7 @@ const TaskForm = () => {
 
           {/* Due Date */}
           <div className="input-container">
-            <label>დედლაინი*</label>
+            <label>დედლაინი</label>
             <input
               type="date"
               {...register("dueDate")}

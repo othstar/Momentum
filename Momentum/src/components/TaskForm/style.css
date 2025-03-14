@@ -1,5 +1,5 @@
 .task-container h2 {
-  color: black;
+  color: #212529;
   font-family: "FiraGO";
   font-weight: 600;
   font-size: 34px;
@@ -19,7 +19,7 @@
 }
 
 .form-fill label {
-  color: black;
+  color: #212529;
   font-family: "FiraGO";
   font-weight: 400;
   line-height: 100%;
@@ -32,7 +32,7 @@
   width: 550px;
   background-color: white;
   border: 1px solid #dee2e6;
-  color: black;
+  color: #212529;
   padding: 10px;
   font-size: 14px;
   border-radius: 5px;
@@ -44,20 +44,37 @@
 .form-fill textarea:focus,
 .form-fill select:focus {
   outline: none;
-  border-color: #6c757d;
+  border-color: #8338ec;
+}
+
+.form-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.collegue {
+  color: #adb5bd !important;
 }
 
 .input-field.error {
-  border-color: red;
+  border-color: #fa4d4d;
 }
 
 .input-field.valid {
-  border-color: green;
+  border-color: #08a508;
 }
 
 .priority-status {
   display: flex;
   justify-content: space-between;
+  padding: 0;
 }
 
 .priority-status select {
@@ -78,11 +95,11 @@
 }
 
 .error-text {
-  color: red;
+  color: #fa4d4d;
 }
 
 .valid-text {
-  color: green;
+  color: #08a508;
 }
 
 .default-text {
