@@ -14,3 +14,8 @@ export const fetchTasks = async () => {
   const response = await axiosClient.get("/tasks");
   return response.data;
 };
+
+export const postEmployee = async () => {
+  const response = await axiosClient.post("/employees");
+  return response.data;
+};
