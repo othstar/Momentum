@@ -1,0 +1,98 @@
+.details-container {
+  display: flex;
+  justify-content: space-between;
+  font-family: "FiraGO";
+}
+
+.details-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-status {
+  display: flex;
+  gap: 1rem;
+}
+
+.task-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.task-main-info h3 {
+  color: #212529;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 100%;
+}
+
+.task-main-info p {
+  color: black;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+}
+
+.task-details {
+  margin-top: 1rem;
+}
+
+.alltask-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.task-details h4 {
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+}
+
+.status-task,
+.employee-info,
+.task-date {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.status-task span,
+.employee-info span,
+.task-date span {
+  color: #474747;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.status-task select {
+  color: #0d0f10;
+  font-family: "FiraGO";
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 100%;
+  background-color: transparent;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+}
+
+.employee-department {
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 100%;
+}
+
+.employee-details {
+  display: flex;
+}
+
+.employee-name {
+  display: flex;
+  flex-direction: column;
+  color: #0d0f10;
+  font-size: 14px;
+}

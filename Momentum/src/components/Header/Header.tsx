@@ -1,6 +1,7 @@
 import "./style.css";
 import Logo from "../../assets/Images/Hourglass.png";
 import { NavLink } from "react-router-dom";
+import MyModal from "../Modal";
 
 const Header = () => {
   return (
@@ -14,7 +15,7 @@ const Header = () => {
         </NavLink>
         <div className="header-right">
           <div className="register-user">
-            <span>თანამშრომლის შექმნა</span>
+            <MyModal />
           </div>
           <NavLink to="/addtask">
             <div className="new-task">
