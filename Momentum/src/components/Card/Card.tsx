@@ -55,7 +55,7 @@ const Card = () => {
                       ? "design"
                       : tasks.department.name === "მარკეტინგის დეპარტამენტი"
                       ? "marketing"
-                      : "human-res"
+                      : ""
                   }`}
                 >
                   {`${

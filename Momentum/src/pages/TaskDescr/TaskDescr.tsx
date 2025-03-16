@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import "./style.css";
-import { fetchTasks } from "../../config/API/fetchers";
+import { fetchStatuses, fetchTasks } from "../../config/API/fetchers";
 import { useQuery } from "@tanstack/react-query";
-import { TaskFormData } from "../../static/types";
+import { Status, TaskFormData } from "../../static/types";
 import Shape from "../../assets/Images/Shape.png";
+import { useState } from "react";
 
 const TaskDescr = () => {
   const params = useParams<{ id: string }>();
@@ -12,10 +13,31 @@ const TaskDescr = () => {
     queryKey: ["tasks"],
     queryFn: fetchTasks,
   });
-  if (isLoading) return <div>Loading...</div>;
-  if (error instanceof Error) return <div>Error: {error.message}</div>;
+
+  const {
+    data: statusesData,
+    error: statusesError,
+    isLoading: statusesLoading,
+  } = useQuery({
+    queryKey: ["statuses"],
+    queryFn: fetchStatuses,
+  });
+  if (isLoading || statusesLoading) return <div>Loading...</div>;
+  if (error instanceof Error || statusesError instanceof Error) {
+    return <div>Error: {error?.message || statusesError?.message}</div>;
+  }
   const task = data?.find((task: TaskFormData) => task.id === Number(id));
-  console.log(task);
+
+  const [comments, setComments] = useState<string[]>([]);
+  const [newComment, setNewComment] = useState("");
+
+  const handleCommentSubmit = () => {
+    if (newComment.trim()) {
+      setComments([...comments, newComment]);
+      setNewComment("");
+    }
+  };
+
   return (
     <div className="details-container container">
       {task ? (
@@ -83,7 +105,9 @@ const TaskDescr = () => {
               <div className="status-task">
                 <span>სტატუსი</span>
                 <select>
-                  <option>{task.status.name}</option>
+                  {statusesData?.map((statuses: Status) => (
+                    <option>{statuses.name}</option>
+                  ))}
                 </select>
               </div>
               <div className="employee-info">
@@ -108,7 +132,22 @@ const TaskDescr = () => {
         <div>No task found</div>
       )}
       {task ? (
-        <div className="details-right" key={task.id}></div>
+        <div className="details-right" key={task.id}>
+          <div className="comment-section">
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="დაწერე კომენტარი"
+            />
+            <button onClick={handleCommentSubmit}>დააკომენტარე</button>
+
+            <ul className="comment-list">
+              {comments.map((comment: string, index: number) => (
+                <li key={index}>{comment}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       ) : (
         <div>No task found</div>
       )}

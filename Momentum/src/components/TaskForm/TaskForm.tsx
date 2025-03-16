@@ -2,6 +2,13 @@ import "./style.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useQuery } from "@tanstack/react-query";
+import {
+  fetchDepartments,
+  fetchPriorities,
+  fetchStatuses,
+} from "../../config/API/fetchers";
+import { Department, Priority, Status } from "../../static/types";
 
 const schema = yup.object().shape({
   taskName: yup
@@ -34,6 +41,50 @@ const TaskForm = () => {
   const onSubmit = (data: any) => {
     console.log("Form Data:", data);
   };
+
+  const {
+    data: departmentsData,
+    error: departmentsError,
+    isLoading: departmentsLoading,
+  } = useQuery({
+    queryKey: ["departments"],
+    queryFn: fetchDepartments,
+  });
+
+  const {
+    data: statusesData,
+    error: statusesError,
+    isLoading: statusesLoading,
+  } = useQuery({
+    queryKey: ["statuses"],
+    queryFn: fetchStatuses,
+  });
+
+  const {
+    data: prioritiesData,
+    error: prioritiesError,
+    isLoading: prioritiesLoading,
+  } = useQuery({
+    queryKey: ["priorities"],
+    queryFn: fetchPriorities,
+  });
+
+  if (departmentsLoading || statusesLoading || prioritiesLoading)
+    return <div>Loading...</div>;
+  if (
+    departmentsError instanceof Error ||
+    statusesError instanceof Error ||
+    prioritiesError instanceof Error
+  ) {
+    return (
+      <div>
+        Error:{" "}
+        {departmentsError?.message ||
+          statusesError?.message ||
+          prioritiesError?.message}
+      </div>
+    );
+  }
   return (
     <div className="task-container container">
       <h2>შექმენი ახალი დავალება</h2>
@@ -127,11 +178,14 @@ const TaskForm = () => {
                     ? "valid"
                     : ""
                 }`}
+                // defaultValue={}
               >
-                <option value="">აირჩიე</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                {prioritiesData?.map((priorities: Priority) => (
+                  <option>
+                    <img src={priorities.icon} alt="icon" />
+                    <span>{priorities.name}</span>
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -140,15 +194,13 @@ const TaskForm = () => {
               <label>სტატუსი*</label>
               <select
                 {...register("status")}
-                defaultValue={"დასაწყები"}
                 className={`input-field ${
                   errors.status ? "error" : touchedFields.status ? "valid" : ""
                 }`}
               >
-                <option>დასაწყები</option>
-                <option>პროგრესში</option>
-                <option>მზად ტესტირებისთვის</option>
-                <option>დასრულებული</option>
+                {statusesData?.map((statuses: Status) => (
+                  <option> {statuses.name} </option>
+                ))}
               </select>
             </div>
           </div>
@@ -160,7 +212,6 @@ const TaskForm = () => {
             <label>დეპარტამენტი*</label>
             <select
               {...register("department")}
-              defaultValue="დიზაინის დეპარტამენტი"
               className={`input-field ${
                 errors.department
                   ? "error"
@@ -169,11 +220,9 @@ const TaskForm = () => {
                   : ""
               }`}
             >
-              <option>მარკეტინგის დეპარტამენტი</option>
-              <option>დიზაინის დეპარტამენტი</option>
-              <option>ლოჯისტიკის დეპარტამენტი</option>
-              <option>IT დეპარტამენტი</option>
-              <option>გაყიდვების დეპარტამენტი</option>
+              {departmentsData?.map((departments: Department) => (
+                <option>{departments.name}</option>
+              ))}
             </select>
           </div>
 

@@ -15,11 +15,10 @@ export type Department = {
 };
 
 export type Employee = {
-  id: number;
   name: string;
   surname: string;
-  avatar: string;
-  department: Department;
+  avatar: any;
+  department_id: number | string;
 };
 
 export type TaskFormData = {
