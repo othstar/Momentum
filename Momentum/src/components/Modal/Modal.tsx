@@ -62,8 +62,8 @@ const MyModal = () => {
       console.log(error);
     }
     console.log(data);
-    // reset();
-    // closeModal();
+    reset();
+    closeModal();
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -9,7 +9,10 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use((req) => {
-  req.headers["Content-Type"] = "application/json";
+  if (!(req.data instanceof FormData)) {
+    req.headers["Content-Type"] = "application/json";
+  }
+
   req.headers["Accept"] = "application/json";
 
   const token = import.meta.env.VITE_API_TOKEN;

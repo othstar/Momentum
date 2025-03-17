@@ -51,7 +51,6 @@ export const postEmployee = async (employee: Employee) => {
   }
 
   if (avatarFile instanceof File) {
-    console.log("Appending File:", avatarFile);
     formData.append("avatar", avatarFile);
   }
 
