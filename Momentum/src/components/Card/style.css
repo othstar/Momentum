@@ -1,15 +1,65 @@
-.card-container {
+.cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  margin-top: 2rem;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.status-bar {
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  width: 380px;
+  height: 51px;
+  text-align: center;
+  font-family: "FiraGO";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 40%;
+  letter-spacing: 0;
+}
+
+.starter {
+  background-color: #f7bc30;
+}
+
+.in-progress {
+  background-color: #fb5607;
+}
+
+.ready-for-test {
+  background-color: #ff006e;
+}
+
+.finished {
+  background-color: #3a86ff;
 }
 
 .card {
   border: 1px solid red;
   border-radius: 20px;
   font-family: "FiraGO";
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
+  margin-bottom: 2rem;
+  height: 230px;
+}
+
+.type-starter {
+  border-color: #f7bc30;
+}
+.type-in-progress {
+  border-color: #fb5607;
+}
+.type-ready-for-test {
+  border-color: #ff006e;
+}
+.type-finished {
+  border-color: #3a86ff;
 }
 
 .card h3 {
@@ -34,6 +84,9 @@
   gap: 0.5rem;
   border-radius: 10px;
   padding: 5px 10px !important;
+  font-weight: 500;
+  font-size: 12px;
+  align-items: center;
 }
 
 .card-low {
@@ -69,9 +122,10 @@
   margin: auto;
   border: 1px solid transparent;
   border-radius: 30px;
-  padding: 2px 30px;
+  padding: 2px 25px;
   background-color: #08a508;
-
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .departments span {
@@ -137,3 +191,9 @@
   justify-content: space-between;
   height: 25px;
 }
+
+.employee-avatar {
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+

@@ -5,8 +5,8 @@ import MyModal from "../Modal";
 
 const Header = () => {
   return (
-    <header>
-      <div className="header-container container">
+    <header className="container">
+      <div className="header-container">
         <NavLink to={"/"}>
           <div className="header-left">
             <span>Momentum</span>

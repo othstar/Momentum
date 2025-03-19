@@ -99,6 +99,15 @@
 
 .employee-details {
   display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.employee-details img {
+  border: 1px solid transparent;
+  border-radius: 50%;
+  max-width: 32px;
+  margin-top: 0.5rem;
 }
 
 .employee-name {

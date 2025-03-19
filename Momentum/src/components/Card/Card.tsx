@@ -1,89 +1,165 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchTasks } from "../../config/API/fetchers";
-import { TaskFormData } from "../../static/types";
-import Comments from "../../assets/Images/Comments.png";
+import { fetchStatuses, fetchTasks } from "../../config/API/fetchers";
 import "./style.css";
+import { Status, TaskFormData } from "../../static/types";
 import { NavLink } from "react-router-dom";
 
 const Card = () => {
-  const { data, error, isLoading } = useQuery({
+  const {
+    data: statuses,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["statuses"],
+    queryFn: fetchStatuses,
+  });
+
+  const {
+    data: tasks,
+    error: taskError,
+    isLoading: taskLoading,
+  } = useQuery({
     queryKey: ["tasks"],
     queryFn: fetchTasks,
   });
-  if (isLoading) return <div>Loading...</div>;
-  if (error instanceof Error) return <div>Error: {error.message}</div>;
+
+  if (isLoading || taskLoading) return <div>Loading...</div>;
+  if (error instanceof Error || taskError instanceof Error)
+    return (
+      <div>
+        Error: {error?.message} || {taskError?.message}
+      </div>
+    );
 
   return (
-    <div className="card-container">
-      {data?.map((tasks: TaskFormData) => (
-        <NavLink to={`tasks/${tasks.id}`}>
-          <div className="card" key={tasks.id}>
-            <div className="upper-card">
-              <div className={"upper-left-card"}>
-                <div
-                  className={`priority-status ${
-                    tasks.priority.name === "დაბალი"
-                      ? "card-low"
-                      : tasks.priority.name === "მაღალი"
-                      ? "card-high"
-                      : tasks.priority.name === "საშუალო"
-                      ? "card-medium"
-                      : ""
-                  }`}
-                >
-                  <img src={tasks.priority.icon} alt="Shape" />
-                  <span>{tasks.priority.name}</span>
-                </div>
-                <div
-                  className={`departments ${
-                    tasks.department.name === "IT დეპარტამენტი"
-                      ? "IT"
-                      : tasks.department.name === "ლოჯოსტიკის დეპარტამენტი"
-                      ? "logistic"
-                      : tasks.department.name ===
-                        "გაყიდვები და მარკეტინგის დეპარტამენტი"
-                      ? "marketing"
-                      : ""
-                  }`}
-                >
-                  <span>
-                    {`${
-                      tasks.department.name === "ტექნოლოგიების დეპარტამენტი"
-                        ? "ინფ. ტექ."
-                        : tasks.department.name === "ლოჯოსტიკის დეპარტამენტი"
-                        ? "ლოჯისტიკა"
-                        : tasks.department.name ===
-                          "გაყიდვები და მარკეტინგის დეპარტამენტი"
-                        ? "მარკეტინგი"
-                        : "ად. რეს."
-                    }`}
-                  </span>
-                </div>
-              </div>
+    <div className="cards">
+      {statuses?.map((status: Status) => {
+        const filteredTasks = tasks?.filter(
+          (task: TaskFormData) => task.status?.id === status.id
+        );
 
-              <div className="upper-right-card">
-                <span>
-                  {tasks.due_date
-                    ? new Date(tasks.due_date).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })
-                    : ""}
-                </span>
-              </div>
+        return (
+          <div className="status">
+            <div
+              key={status.id}
+              className={`status-bar ${
+                status.id === 1
+                  ? "starter"
+                  : status.id === 2
+                  ? "in-progress"
+                  : status.id === 3
+                  ? "ready-for-test"
+                  : status.id === 4
+                  ? "finished"
+                  : ""
+              }`}
+            >
+              <h3>{status.name}</h3>
             </div>
-            <div className="card-description">
-              <h3>{tasks.name} </h3>
-              <p>{tasks.description}</p>
-            </div>
-            <div className="card-footer">
-              <img src={tasks.employee.avatar} alt="" />
-              <img src={Comments} alt="" />
+            <div className="card-container">
+              {filteredTasks.length > 0 ? (
+                filteredTasks.map((task: TaskFormData) => (
+                  <NavLink to={`tasks/${task.id}`} key={task.id}>
+                    <div
+                      className={`card type-${
+                        task.status.id === 1
+                          ? "starter"
+                          : task.status.id === 2
+                          ? "in-progress"
+                          : task.status.id === 3
+                          ? "ready-for-test"
+                          : task.status.id === 4
+                          ? "finished"
+                          : ""
+                      }`}
+                    >
+                      <div className="upper-card">
+                        <div className="upper-left-card">
+                          <div
+                            className={`priority-status ${
+                              task.priority.name === "დაბალი"
+                                ? "card-low"
+                                : task.priority.name === "მაღალი"
+                                ? "card-high"
+                                : task.priority.name === "საშუალო"
+                                ? "card-medium"
+                                : ""
+                            }`}
+                          >
+                            <img src={task.priority.icon} alt="Shape" />
+                            <span>{task.priority.name}</span>
+                          </div>
+                          <div
+                            className={`departments ${
+                              task.department.name ===
+                              "ტექნოლოგიების დეპარტამენტი"
+                                ? "IT"
+                                : task.department.name ===
+                                  "ლოჯოსტიკის დეპარტამენტი"
+                                ? "logistic"
+                                : task.department.name ===
+                                  "გაყიდვები და მარკეტინგის დეპარტამენტი"
+                                ? "marketing"
+                                : ""
+                            }`}
+                          >
+                            <span>
+                              {`${
+                                task.department.name ===
+                                "ტექნოლოგიების დეპარტამენტი"
+                                  ? "ინფ. ტექ."
+                                  : task.department.name ===
+                                    "ლოჯოსტიკის დეპარტამენტი"
+                                  ? "ლოჯისტიკა"
+                                  : task.department.name ===
+                                    "გაყიდვები და მარკეტინგის დეპარტამენტი"
+                                  ? "მარკეტინგი"
+                                  : "ად. რეს."
+                              }`}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="upper-right-card">
+                          <span>
+                            {task.due_date
+                              ? new Date(task.due_date).toLocaleDateString(
+                                  "en-GB",
+                                  {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                  }
+                                )
+                              : ""}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="card-description">
+                        <h3>{task.name} </h3>
+                        <p>
+                          {task.description.length > 100
+                            ? `${task.description.substring(0, 100)}...`
+                            : task.description}
+                        </p>
+                      </div>
+                      <div className="card-footer">
+                        <img
+                          src={task.employee.avatar}
+                          alt="avatar"
+                          className="employee-avatar"
+                        />
+                      </div>
+                    </div>
+                  </NavLink>
+                ))
+              ) : (
+                <p>No tasks available</p>
+              )}
             </div>
           </div>
-        </NavLink>
-      ))}
+        );
+      })}
     </div>
   );
 };

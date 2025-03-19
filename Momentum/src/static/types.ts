@@ -23,6 +23,7 @@ export type Employee = {
 };
 
 export type PostFormData = {
+  id: number;
   name: string;
   description: string;
   due_date: string;

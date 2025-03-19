@@ -38,7 +38,7 @@ const TaskDescr = () => {
   };
 
   return (
-    <div className="details-container container">
+    <div className="details-container">
       {task ? (
         <div className="details-left" key={task.id}>
           <div className="details-status">
@@ -58,7 +58,7 @@ const TaskDescr = () => {
             </div>
             <div
               className={`department ${
-                task.department.name === "IT დეპარტამენტი"
+                task.department.name === "ტექნოლოგიების დეპარტამენტი"
                   ? "IT"
                   : task.department.name === "ლოჯოსტიკის დეპარტამენტი"
                   ? "logistic"
@@ -105,12 +105,15 @@ const TaskDescr = () => {
                     <span className="employee-department">
                       {task.department.name}
                     </span>
-                    <span className="employee-name">{task.employee.name}</span>
+                    <span className="employee-name">
+                      {task.employee.name} {task.employee.surname}
+                    </span>
                   </div>
                 </div>
               </div>
               <div className="task-date">
                 <span>დავალების ვადა</span>
+                <span>{task.due_date}</span>
               </div>
             </div>
           </div>
