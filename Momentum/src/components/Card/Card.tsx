@@ -3,6 +3,7 @@ import { fetchStatuses, fetchTasks } from "../../config/API/fetchers";
 import "./style.css";
 import { Status, TaskFormData } from "../../static/types";
 import { NavLink } from "react-router-dom";
+import Comment from "../../assets/Images/Comments.png";
 
 const Card = () => {
   const {
@@ -149,6 +150,7 @@ const Card = () => {
                           alt="avatar"
                           className="employee-avatar"
                         />
+                        <img src={Comment} alt="Comment" />
                       </div>
                     </div>
                   </NavLink>

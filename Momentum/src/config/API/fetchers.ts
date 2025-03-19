@@ -38,6 +38,19 @@ export const postTask = async (task: PostFormData) => {
   return response.data;
 };
 
+export const updateTask = async (
+  id: number,
+  updatedTask: Partial<PostFormData>
+) => {
+  const response = await axiosClient.put(`/tasks/${id}`, updatedTask, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return response.data;
+};
+
 export const postEmployee = async (employee: Employee) => {
   const formData = new FormData();
   formData.append("name", employee.name);

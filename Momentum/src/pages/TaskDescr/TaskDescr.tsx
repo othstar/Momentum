@@ -1,6 +1,10 @@
 import { useParams } from "react-router-dom";
 import "./style.css";
-import { fetchStatuses, fetchTasks } from "../../config/API/fetchers";
+import {
+  fetchStatuses,
+  fetchTasks,
+  updateTask,
+} from "../../config/API/fetchers";
 import { useQuery } from "@tanstack/react-query";
 import { Status, TaskFormData } from "../../static/types";
 import { useState } from "react";
@@ -34,6 +38,27 @@ const TaskDescr = () => {
     if (newComment.trim()) {
       setComments([...comments, newComment]);
       setNewComment("");
+    }
+  };
+  const handleStatusChange = async (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    if (!task) return;
+
+    const newStatus = statusesData.find(
+      (s: Status) => s.name === event.target.value
+    );
+
+    if (!newStatus || newStatus.id === undefined) {
+      console.error("Invalid status selection:", newStatus);
+      return;
+    }
+
+    try {
+      await updateTask(task.id, { status_id: newStatus.id });
+      window.location.reload();
+    } catch (error) {
+      console.error("Failed to update status", error);
     }
   };
 
@@ -91,9 +116,12 @@ const TaskDescr = () => {
             <div className="alltask-details">
               <div className="status-task">
                 <span>სტატუსი</span>
-                <select>
-                  {statusesData?.map((statuses: Status) => (
-                    <option>{statuses.name}</option>
+                <select
+                  defaultValue={task.status.name}
+                  onChange={handleStatusChange}
+                >
+                  {statusesData?.map((status: Status) => (
+                    <option key={status.id}>{status.name}</option>
                   ))}
                 </select>
               </div>

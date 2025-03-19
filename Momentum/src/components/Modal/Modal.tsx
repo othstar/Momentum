@@ -43,6 +43,7 @@ const MyModal = () => {
   const closeModal = () => {
     setIsOpen(false);
     setAvatarPreview(null);
+    reset();
   };
 
   const {
@@ -135,10 +136,26 @@ const MyModal = () => {
                       errors.name ? "error" : touchedFields.name ? "valid" : ""
                     }`}
                   />
-                  <span className={errors.name ? "error-text" : "default-text"}>
+                  <span
+                    className={
+                      errors.name
+                        ? "error-text"
+                        : touchedFields.name
+                        ? "valid-text"
+                        : "default-text"
+                    }
+                  >
                     მინიმუმ 2 სიმბოლო
                   </span>
-                  <span className={errors.name ? "error-text" : "default-text"}>
+                  <span
+                    className={
+                      errors.name
+                        ? "error-text"
+                        : touchedFields.name
+                        ? "valid-text"
+                        : "default-text"
+                    }
+                  >
                     მაქსიმუმ 255 სიმბოლო
                   </span>
                 </div>
@@ -156,12 +173,24 @@ const MyModal = () => {
                     }`}
                   />
                   <span
-                    className={errors.surname ? "error-text" : "default-text"}
+                    className={
+                      errors.surname
+                        ? "error-text"
+                        : touchedFields.surname
+                        ? "valid-text"
+                        : "default-text"
+                    }
                   >
                     მინიმუმ 2 სიმბოლო
                   </span>
                   <span
-                    className={errors.surname ? "error-text" : "default-text"}
+                    className={
+                      errors.surname
+                        ? "error-text"
+                        : touchedFields.surname
+                        ? "valid-text"
+                        : "default-text"
+                    }
                   >
                     მაქსიმუმ 255 სიმბოლო
                   </span>
