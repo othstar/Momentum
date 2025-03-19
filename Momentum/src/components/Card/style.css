@@ -40,20 +40,25 @@
   border: 1px solid #08a508;
 }
 
+.card-low span {
+  color: #08a508 !important;
+}
+
 .card-high {
   border: 1px solid #fa4d4d;
 }
 
-.card-high img {
-  rotate: 180deg;
+.card-high span {
+  color: #fa4d4d !important;
 }
+
 
 .card-medium {
   border: 1px solid #ffbe0b;
 }
 
-.card-low span {
-  color: #08a508 !important;
+.card-medium span {
+  color: #ffbe0b !important;
 }
 
 .upper-left-card span {
@@ -61,8 +66,28 @@
 }
 
 .departments {
-  color: white !important;
   margin: auto;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  padding: 2px 30px;
+  background-color: #08a508;
+
+}
+
+.departments span {
+  color: white;
+}
+
+.IT {
+  background-color:#FFD86D !important;
+}
+
+.logistic {
+  background-color: #89B6FF !important;
+}
+
+.marketing { 
+  background-color: #FD9A6A !important;
 }
 
 .human-res {
@@ -110,4 +135,5 @@
 .card-footer {
   display: flex;
   justify-content: space-between;
+  height: 25px;
 }

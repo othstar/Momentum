@@ -1,3 +1,9 @@
+.task-container {
+  width: 75%;
+  margin-left: 6rem;
+  padding: 2rem 1rem;
+}
+
 .task-container h2 {
   color: #212529;
   font-family: "FiraGO";
@@ -80,6 +86,17 @@
 
 .priority-status select {
   width: 259px;
+}
+
+.submit-button {
+  width: 200px;
+  margin-left: 22rem;
+  font-family: "FiraGO";
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: white;
+  background-color: #8338ec;
 }
 
 .validation-container {

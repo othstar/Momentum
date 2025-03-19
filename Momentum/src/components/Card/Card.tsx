@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchTasks } from "../../config/API/fetchers";
 import { TaskFormData } from "../../static/types";
 import Comments from "../../assets/Images/Comments.png";
-import Shape from "../../assets/Images/Shape.png";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 
@@ -32,44 +31,34 @@ const Card = () => {
                       : ""
                   }`}
                 >
-                  <img
-                    src={Shape}
-                    alt="Shape"
-                    className={`priority ${
-                      tasks.priority.name === "დაბალი"
-                        ? "low"
-                        : tasks.priority.name === "მაღალი"
-                        ? "high"
-                        : ""
-                    }`}
-                  />
+                  <img src={tasks.priority.icon} alt="Shape" />
                   <span>{tasks.priority.name}</span>
                 </div>
-                <span
+                <div
                   className={`departments ${
                     tasks.department.name === "IT დეპარტამენტი"
                       ? "IT"
-                      : tasks.department.name === "ლოჯისტიკის დეპარტამენტი"
+                      : tasks.department.name === "ლოჯოსტიკის დეპარტამენტი"
                       ? "logistic"
-                      : tasks.department.name === "დიზაინის დეპარტამენტი"
-                      ? "design"
-                      : tasks.department.name === "მარკეტინგის დეპარტამენტი"
+                      : tasks.department.name ===
+                        "გაყიდვები და მარკეტინგის დეპარტამენტი"
                       ? "marketing"
                       : ""
                   }`}
                 >
-                  {`${
-                    tasks.department.name === "IT დეპარტამენტი"
-                      ? "ინფ. ტექ."
-                      : tasks.department.name === "ლოჯისტიკის დეპარტამენტი"
-                      ? "ლოჯისტიკა"
-                      : tasks.department.name === "დიზაინის დეპარტამენტი"
-                      ? "დიზაინი"
-                      : tasks.department.name === "მარკეტინგის დეპარტამენტი"
-                      ? "მარკეტინგი"
-                      : "ად. რეს."
-                  }`}
-                </span>
+                  <span>
+                    {`${
+                      tasks.department.name === "ტექნოლოგიების დეპარტამენტი"
+                        ? "ინფ. ტექ."
+                        : tasks.department.name === "ლოჯოსტიკის დეპარტამენტი"
+                        ? "ლოჯისტიკა"
+                        : tasks.department.name ===
+                          "გაყიდვები და მარკეტინგის დეპარტამენტი"
+                        ? "მარკეტინგი"
+                        : "ად. რეს."
+                    }`}
+                  </span>
+                </div>
               </div>
 
               <div className="upper-right-card">

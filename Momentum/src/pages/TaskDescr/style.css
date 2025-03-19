@@ -14,6 +14,17 @@
   gap: 1rem;
 }
 
+.priority-status span {
+  color: black;
+}
+
+.department {
+  border: 1px solid transparent;
+  border-radius: 30px;
+  padding: 5px 30px;
+  background-color: #08a508;
+}
+
 .task-main-info {
   display: flex;
   flex-direction: column;
@@ -121,11 +132,12 @@
 .comment-section button {
   margin-top: 10px;
   padding: 8px 16px;
-  background-color: #6c5ce7;
+  background-color: #8338ec;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 34rem;
 }
 
 .comment-section button:hover {

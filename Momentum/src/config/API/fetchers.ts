@@ -1,5 +1,5 @@
 import axiosClient from "../api";
-import { Employee, TaskFormData } from "../../static/types";
+import { Employee, PostFormData } from "../../static/types";
 
 export const fetchStatuses = async () => {
   const response = await axiosClient.get("/statuses");
@@ -21,26 +21,25 @@ export const fetchTasks = async () => {
 };
 
 export const fetchEmployee = async () => {
-  const response = await axiosClient.post("/employees");
+  const response = await axiosClient.get("/employees");
   return response.data;
 };
 
-export const postTask = async (task: TaskFormData) => {
+export const postTask = async (task: PostFormData) => {
   const formData = new FormData();
-  formData.append("task", JSON.stringify(task));
+  formData.append("name", task.name);
+  formData.append("description", task.description);
+  formData.append("due_date", task.due_date);
+  formData.append("employee_id", String(task.employee_id));
+  formData.append("status_id", String(task.status_id));
+  formData.append("priority_id", String(task.priority_id));
 
-  const response = await axiosClient.post("/tasks", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-
+  const response = await axiosClient.post("/tasks", formData);
   return response.data;
 };
 
 export const postEmployee = async (employee: Employee) => {
   const formData = new FormData();
-
   formData.append("name", employee.name);
   formData.append("surname", employee.surname);
   formData.append("department_id", String(employee.department_id));

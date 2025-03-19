@@ -5,13 +5,22 @@ import * as yup from "yup";
 import { useQuery } from "@tanstack/react-query";
 import {
   fetchDepartments,
+  fetchEmployee,
   fetchPriorities,
   fetchStatuses,
+  postTask,
 } from "../../config/API/fetchers";
-import { Department, Priority, Status } from "../../static/types";
+import {
+  Department,
+  Employee,
+  Priority,
+  Status,
+  TaskFormData,
+} from "../../static/types";
+import { useState } from "react";
 
 const schema = yup.object().shape({
-  taskName: yup
+  name: yup
     .string()
     .min(2, "მინიმუმ 2 სიმბოლო")
     .max(255, "მაქსიმუმ 255 სიმბოლო")
@@ -21,14 +30,22 @@ const schema = yup.object().shape({
     .min(2, "მინიმუმ 2 სიმბოლო")
     .max(255, "მაქსიმუმ 255 სიმბოლო")
     .required("სავალდებულოა"),
-  priority: yup.string().required("სავალდებულოა"),
-  status: yup.string().required("სავალდებულოა"),
+  priority_id: yup.string().required("სავალდებულოა"),
   department: yup.string().required("სავალდებულოა"),
-  person: yup.string().required("სავალდებულოა"),
-  dueDate: yup.string().required("სავალდებულოა"),
+  status_id: yup.string().required("სავალდებულოა"),
+  employee_id: yup.string().required("სავალდებულოა"),
+  due_date: yup.string().required("სავალდებულოა"),
 });
 
 const TaskForm = () => {
+  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(
+    null
+  );
+
+  const handleDepartmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedDepartment(e.target.value);
+  };
+
   const {
     register,
     handleSubmit,
@@ -39,7 +56,12 @@ const TaskForm = () => {
   });
 
   const onSubmit = (data: any) => {
-    console.log("Form Data:", data);
+    console.log(data);
+    try {
+      postTask(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const {
@@ -69,12 +91,27 @@ const TaskForm = () => {
     queryFn: fetchPriorities,
   });
 
-  if (departmentsLoading || statusesLoading || prioritiesLoading)
+  const {
+    data: employeesData,
+    error: employeesError,
+    isLoading: employeesLoading,
+  } = useQuery({
+    queryKey: ["employees"],
+    queryFn: fetchEmployee,
+  });
+
+  if (
+    departmentsLoading ||
+    statusesLoading ||
+    prioritiesLoading ||
+    employeesLoading
+  )
     return <div>Loading...</div>;
   if (
     departmentsError instanceof Error ||
     statusesError instanceof Error ||
-    prioritiesError instanceof Error
+    prioritiesError instanceof Error ||
+    employeesError instanceof Error
   ) {
     return (
       <div>
@@ -86,7 +123,7 @@ const TaskForm = () => {
     );
   }
   return (
-    <div className="task-container container">
+    <div className="task-container">
       <h2>შექმენი ახალი დავალება</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="form-fill container">
         {/* Task Name */}
@@ -95,20 +132,16 @@ const TaskForm = () => {
             <label>სათაური*</label>
             <input
               type="text"
-              {...register("taskName")}
+              {...register("name")}
               className={`input-field ${
-                errors.taskName
-                  ? "error"
-                  : touchedFields.taskName
-                  ? "valid"
-                  : ""
+                errors.name ? "error" : touchedFields.name ? "valid" : ""
               }`}
             />
             <span
               className={
-                errors.taskName && touchedFields.taskName
+                errors.name && touchedFields.name
                   ? "error-text"
-                  : touchedFields.taskName
+                  : touchedFields.name
                   ? "valid-text"
                   : "default-text"
               }
@@ -117,9 +150,9 @@ const TaskForm = () => {
             </span>
             <span
               className={
-                errors.taskName && touchedFields.taskName
+                errors.name && touchedFields.name
                   ? "error-text"
-                  : touchedFields.taskName
+                  : touchedFields.name
                   ? "valid-text"
                   : "default-text"
               }
@@ -170,20 +203,20 @@ const TaskForm = () => {
             <div className="input-container">
               <label>პრიორიტეტი*</label>
               <select
-                {...register("priority")}
+                {...register("priority_id")}
                 className={`input-field ${
-                  errors.priority
+                  errors.priority_id
                     ? "error"
-                    : touchedFields.priority
+                    : touchedFields.priority_id
                     ? "valid"
                     : ""
                 }`}
                 // defaultValue={}
               >
-                {prioritiesData?.map((priorities: Priority) => (
-                  <option>
-                    <img src={priorities.icon} alt="icon" />
-                    <span>{priorities.name}</span>
+                {prioritiesData?.map((priority: Priority) => (
+                  <option value={priority.id} key={priority.id}>
+                    <img src={priority.icon} alt="icon" />
+                    <span>{priority.name}</span>
                   </option>
                 ))}
               </select>
@@ -193,13 +226,20 @@ const TaskForm = () => {
             <div className="input-container">
               <label>სტატუსი*</label>
               <select
-                {...register("status")}
+                {...register("status_id")}
                 className={`input-field ${
-                  errors.status ? "error" : touchedFields.status ? "valid" : ""
+                  errors.status_id
+                    ? "error"
+                    : touchedFields.status_id
+                    ? "valid"
+                    : ""
                 }`}
               >
-                {statusesData?.map((statuses: Status) => (
-                  <option> {statuses.name} </option>
+                {statusesData?.map((status: Status) => (
+                  <option value={status.id} key={status.id}>
+                    {" "}
+                    {status.name}{" "}
+                  </option>
                 ))}
               </select>
             </div>
@@ -219,10 +259,15 @@ const TaskForm = () => {
                   ? "valid"
                   : ""
               }`}
+              onChange={handleDepartmentChange}
             >
-              {departmentsData?.map((departments: Department) => (
-                <option>{departments.name}</option>
-              ))}
+              {departmentsData?.map((department: Department) => {
+                return (
+                  <option key={department.id} value={department.id}>
+                    {department.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
 
@@ -230,15 +275,24 @@ const TaskForm = () => {
           <div className="input-container">
             <label className="collegue">პასუხისმგებელი თანამშრომელი</label>
             <select
-              {...register("person")}
+              {...register("employee_id")}
               className={`input-field ${
-                errors.person ? "error" : touchedFields.person ? "valid" : ""
+                errors.employee_id
+                  ? "error"
+                  : touchedFields.employee_id
+                  ? "valid"
+                  : ""
               }`}
             >
-              <option value="">აირჩიე</option>
-              <option value="test">test</option>
-              <option value="test2">test2</option>
-              <option value="test3">test3</option>
+              {employeesData
+                ?.filter((employee: TaskFormData) => {
+                  return employee.department.id === Number(selectedDepartment);
+                })
+                .map((employee: Employee) => (
+                  <option key={employee.id} value={employee.id}>
+                    {`${employee.name} ${employee.surname}`}
+                  </option>
+                ))}
             </select>
           </div>
 
@@ -247,9 +301,13 @@ const TaskForm = () => {
             <label>დედლაინი</label>
             <input
               type="date"
-              {...register("dueDate")}
+              {...register("due_date")}
               className={`input-field ${
-                errors.dueDate ? "error" : touchedFields.dueDate ? "valid" : ""
+                errors.due_date
+                  ? "error"
+                  : touchedFields.due_date
+                  ? "valid"
+                  : ""
               }`}
             />
           </div>

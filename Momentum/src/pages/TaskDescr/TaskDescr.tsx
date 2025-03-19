@@ -3,7 +3,6 @@ import "./style.css";
 import { fetchStatuses, fetchTasks } from "../../config/API/fetchers";
 import { useQuery } from "@tanstack/react-query";
 import { Status, TaskFormData } from "../../static/types";
-import Shape from "../../assets/Images/Shape.png";
 import { useState } from "react";
 
 const TaskDescr = () => {
@@ -54,41 +53,29 @@ const TaskDescr = () => {
                   : ""
               }`}
             >
-              <img
-                src={Shape}
-                alt="Shape"
-                className={`priority ${
-                  task.priority.name === "დაბალი"
-                    ? "low"
-                    : task.priority.name === "მაღალი"
-                    ? "high"
-                    : ""
-                }`}
-              />
+              <img src={task.priority.icon} alt="Shape" />
               <span>{task.priority.name}</span>
             </div>
             <div
               className={`department ${
                 task.department.name === "IT დეპარტამენტი"
                   ? "IT"
-                  : task.department.name === "ლოჯისტიკის დეპარტამენტი"
+                  : task.department.name === "ლოჯოსტიკის დეპარტამენტი"
                   ? "logistic"
-                  : task.department.name === "დიზაინის დეპარტამენტი"
-                  ? "design"
-                  : task.department.name === "მარკეტინგის დეპარტამენტი"
+                  : task.department.name ===
+                    "გაყიდვები და მარკეტინგის დეპარტამენტი"
                   ? "marketing"
-                  : "human-res"
+                  : ""
               }`}
             >
               <span>
                 {`${
-                  task.department.name === "IT დეპარტამენტი"
+                  task.department.name === "ტექნოლოგიების დეპარტამენტი"
                     ? "ინფ. ტექ."
-                    : task.department.name === "ლოჯისტიკის დეპარტამენტი"
+                    : task.department.name === "ლოჯოსტიკის დეპარტამენტი"
                     ? "ლოჯისტიკა"
-                    : task.department.name === "დიზაინის დეპარტამენტი"
-                    ? "დიზაინი"
-                    : task.department.name === "მარკეტინგის დეპარტამენტი"
+                    : task.department.name ===
+                      "გაყიდვები და მარკეტინგის დეპარტამენტი"
                     ? "მარკეტინგი"
                     : "ად. რეს."
                 }`}
