@@ -44,6 +44,15 @@
   font-weight: 400;
   line-height: 100%;
   outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #8338ec;
+  padding: 0.7rem 1.3rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.register-employee button:hover {
+  border-color: #b588f4;
 }
 
 .input-field.error {

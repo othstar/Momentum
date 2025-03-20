@@ -1,28 +1,62 @@
 import { useState } from "react";
-import "./style.css";
 import Modal from "react-modal";
-const FilterModal = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+import "./style.css";
 
-  const openModal = () => {
-    setIsOpen(true);
+type FilterModalProps = {
+  buttonLabel: string;
+  filterOptions: string[];
+};
+
+const FilterModal = ({ buttonLabel, filterOptions }: FilterModalProps) => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
+  const toggleFilter = (filter: string) => {
+    setSelectedFilters((prev) =>
+      prev.includes(filter)
+        ? prev.filter((item) => item !== filter)
+        : [...prev, filter]
+    );
   };
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+
+  const buttonText = selectedFilters.length
+    ? `${buttonLabel} (${selectedFilters.length})`
+    : buttonLabel;
+
   return (
     <>
-      <div className="filter-button"></div>
+      <button className="filter-button" onClick={openModal}>
+        {buttonText}
+      </button>
       <Modal
-        onAfterOpen={() => (document.body.style.overflow = "hidden")}
-        onAfterClose={() => (document.body.style.overflow = "auto")}
-        className="employee-modal"
-        overlayClassName="employee-overlay"
-        onRequestClose={closeModal}
-        shouldCloseOnOverlayClick={true}
         isOpen={modalIsOpen}
-        contentLabel="Example Modal"
-      ></Modal>
+        onRequestClose={closeModal}
+        className="filter-modal"
+        overlayClassName="filter-overlay"
+      >
+        <div className="filter-content">
+          <ul>
+            {filterOptions.map((filter) => (
+              <li key={filter}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={selectedFilters.includes(filter)}
+                    onChange={() => toggleFilter(filter)}
+                  />
+                  {filter}
+                </label>
+              </li>
+            ))}
+          </ul>
+          <button className="apply-button" onClick={closeModal}>
+            არჩევა
+          </button>
+        </div>
+      </Modal>
     </>
   );
 };

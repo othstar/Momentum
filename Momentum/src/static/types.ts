@@ -22,6 +22,13 @@ export type Employee = {
   department_id: number | string;
 };
 
+export type PostComments = {
+  id: number;
+  text: string;
+  task_id: number;
+  parent_id: number;
+};
+
 export type PostFormData = {
   id: number;
   name: string;

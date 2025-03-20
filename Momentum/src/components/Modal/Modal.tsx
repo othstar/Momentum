@@ -94,16 +94,7 @@ const MyModal = () => {
     <>
       <div className="employee-button">
         <div className="register-employee">
-          <button
-            onClick={openModal}
-            style={{
-              border: "none",
-              background: "transparent",
-              cursor: "pointer",
-            }}
-          >
-            თანამშრომლის შექმნა
-          </button>
+          <button onClick={openModal}>თანამშრომლის შექმნა</button>
         </div>
       </div>
       <Modal

@@ -1,0 +1,85 @@
+.filter-button {
+  background-color: transparent;
+  color: #0d0f10;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  font-size: "FiraGO";
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.filter-button:hover {
+  color: #8338ec;
+}
+
+.filter-button:focus {
+  outline: none;
+}
+
+.filter-overlay {
+  position: fixed;
+  top: -150px;
+  left: -1270px;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease;
+  border: 1px solid #8338ec;
+}
+
+.filter-modal h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #333;
+}
+
+.filter-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.filter-content li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-content label {
+  font-size: 16px;
+  color: #333;
+}
+
+.filter-content input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.apply-button {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.apply-button:hover {
+  background-color: #218838;
+}

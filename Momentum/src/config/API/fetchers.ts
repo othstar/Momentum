@@ -1,5 +1,5 @@
 import axiosClient from "../api";
-import { Employee, PostFormData } from "../../static/types";
+import { Employee, PostComments, PostFormData } from "../../static/types";
 
 export const fetchStatuses = async () => {
   const response = await axiosClient.get("/statuses");
@@ -35,6 +35,19 @@ export const postTask = async (task: PostFormData) => {
   formData.append("priority_id", String(task.priority_id));
 
   const response = await axiosClient.post("/tasks", formData);
+  return response.data;
+};
+
+export const postComment = async (
+  task: number,
+  comment: Omit<PostComments, "id">
+) => {
+  const formData = new FormData();
+  formData.append("text", comment.text);
+  formData.append("task_id", String(comment.task_id));
+  formData.append("parent_id", String(comment.parent_id));
+
+  const response = await axiosClient.post(`/tasks/${task}/comments`, formData);
   return response.data;
 };
 
