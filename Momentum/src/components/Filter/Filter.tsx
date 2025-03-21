@@ -1,5 +1,4 @@
 import "./style.css";
-import Shape from "../../assets/Images/Shape.png";
 import FilterModal from "../FilterModal";
 import {
   fetchDepartments,
