@@ -57,9 +57,22 @@ const Filter = () => {
     prioritiesData?.map((priority: Priority) => priority.name) || [];
 
   const employeeFilters =
-    employeesData?.map(
-      (employee: Employee) => `${employee.name} ${employee.surname}`
-    ) || [];
+    employeesData?.map((employee: Employee) => (
+      <div
+        className="employee-filter"
+        key={employee.id}
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <img
+          src={employee.avatar}
+          alt="Avatar"
+          style={{ width: "28px", marginRight: "8px" }}
+        />
+        <span>
+          {employee.name} {employee.surname}
+        </span>
+      </div>
+    )) || [];
 
   return (
     <div className="filter-container">
