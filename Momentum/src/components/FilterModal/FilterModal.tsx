@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "./style.css";
 
@@ -21,6 +21,17 @@ const FilterModal = ({ buttonLabel, filterOptions }: FilterModalProps) => {
         : [...prev, filter]
     );
   };
+
+  useEffect(() => {
+    if (modalIsOpen) {
+      const handleScroll = () => {
+        closeModal();
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [modalIsOpen]);
 
   const buttonText = selectedFilters.length
     ? `${buttonLabel} (${selectedFilters.length})`
@@ -52,9 +63,11 @@ const FilterModal = ({ buttonLabel, filterOptions }: FilterModalProps) => {
               </li>
             ))}
           </ul>
-          <button className="apply-button" onClick={closeModal}>
-            არჩევა
-          </button>
+          <div className="apply-container">
+            <button className="apply-button" onClick={closeModal}>
+              არჩევა
+            </button>
+          </div>
         </div>
       </Modal>
     </>

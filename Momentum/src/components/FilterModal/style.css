@@ -22,24 +22,34 @@
 
 .filter-overlay {
   position: fixed;
-  top: -150px;
-  left: -1270px;
-  right: 0;
-  bottom: 0;
+  top: 180px;
+  left: -500px;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 80px;
+  overflow-y: auto;
 }
 
 .filter-modal {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  width: 400px;
+  width: 688px;
   max-width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.3s ease;
   border: 1px solid #8338ec;
+}
+
+.filter-content {
+  max-height: calc(5 * 40px);
+  overflow-y: auto;
+  padding-right: 5px;
 }
 
 .filter-modal h3 {
@@ -55,31 +65,68 @@
 
 .filter-content li {
   margin-bottom: 10px;
-  display: flex;
-  align-items: center;
 }
 
 .filter-content label {
   font-size: 16px;
   color: #333;
+  display: flex;
+  align-items: center;
+  font-family: "FiraGO";
+  font-weight: 400;
+  line-height: 100%;
 }
 
 .filter-content input[type="checkbox"] {
-  margin-right: 10px;
-  transform: scale(1.2);
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #212529;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  margin-right: 8px;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-content input[type="checkbox"]:checked {
+  background-color: transparent;
+  color: #212529;
+}
+
+.filter-content input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: #212529;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.apply-container {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 10px;
+  text-align: right;
 }
 
 .apply-button {
-  background-color: #28a745;
+  background-color: #8338ec;
   color: white;
   padding: 8px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
+  transition: all 0.3s ease-in-out;
+  font-family: "FiraGO";
+  font-weight: 400;
+  line-height: 100%;
 }
 
 .apply-button:hover {
-  background-color: #218838;
+  background-color: #b588f4;
 }

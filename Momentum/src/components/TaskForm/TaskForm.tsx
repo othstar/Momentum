@@ -55,12 +55,13 @@ const TaskForm = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log(data);
     try {
-      postTask(data);
+      await postTask(data);
+      window.location.reload();
     } catch (error) {
-      console.log(error);
+      console.error("Failed to post task", error);
     }
   };
 
